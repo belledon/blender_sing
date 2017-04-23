@@ -35,6 +35,8 @@ MirrorURL: http://us.archive.ubuntu.com/ubuntu/
     python3 -m pip install joblib
     python3 -m pip install scipy
     python3 -m pip install numpy
+    python3 -m pip install transforms3d
+
   
     git clone https://github.com/belledon/blender_fix.git
     cd blender_fix
