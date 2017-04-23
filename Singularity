@@ -28,6 +28,7 @@ MirrorURL: http://us.archive.ubuntu.com/ubuntu/
     apt-get -y install vim
     apt-get -y install xvfb
     apt-get -y install locales
+    apt-get -y install libyaml-cpp-dev
     apt-get -y install python3-pip
     echo "Installing python3 packages"
     python3 -m pip install --upgrade pip
@@ -37,7 +38,7 @@ MirrorURL: http://us.archive.ubuntu.com/ubuntu/
     python3 -m pip install numpy
     python3 -m pip install transforms3d
  
- 
+
   
     git clone https://github.com/belledon/blender_fix.git
     cd blender_fix
