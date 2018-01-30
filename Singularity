@@ -1,45 +1,47 @@
-BootStrap: debootstrap
-OSVersion: xenial
-MirrorURL: http://us.archive.ubuntu.com/ubuntu/
+bootstrap: docker
+from: ubuntu:16.04
 
 
-%runscript
-    echo "SINGULARITY RUNSCRIPT"
-    echo "Arguments received: $*"
-    exec /usr/bin/python3 "$@"
+# %runscript
+#     echo "SINGULARITY RUNSCRIPT"
+#     echo "Arguments received: $*"
+#     exec /usr/bin/python3 "$@"
 
 
 %post
-    echo "Hello from inside the container"
-    export LANG=C.UTF-8
-    export LC_ALL=C
-    apt-get update --fix-missing && apt-get install -y wget bzip2 ca-certificates libglib2.0-0 libxext6 libsm6 libxrender1 git
-    mkdir /om
-    mkdir /cm
-    apt-get -y install software-properties-common 
-    apt-get update
-    apt-get clean
-    echo "Apt-getting packages"
-    apt-get -y install git
-    apt-get -y install cmake
-    apt-get update
-    apt-get -y install g++
-    apt-get -y install wget
-    apt-get -y install vim
-    apt-get -y install xvfb
-    apt-get -y install locales
-    apt-get -y install libyaml-cpp-dev
-    apt-get -y install python3-pip
-    echo "Installing python3 packages"
-    python3 -m pip install --upgrade pip
-    python3 -m pip install multiprocess
-    python3 -m pip install joblib
-    python3 -m pip install scipy
-    python3 -m pip install numpy
-    python3 -m pip install transforms3d
- 
+    apt-get update && apt-get -y install locales
+    # locale-gen C.UTF-8
+    locale-gen en_US.UTF-8
+    # export LANG=C.UTF-8
+    # export LC_ALL=C
+    apt-get install -y  wget \
+                        bzip2 \
+                        ca-certificates \
+                        libglib2.0-0 \
+                        libxext6 \
+                        libsm6 \
+                        libxrender1 \
+                        git \
+                        cmake \
+                        g++ \
+                        xvfb \
+                        libyaml-cpp-dev \
+                        python3-dev \
+                        python3-pip \
+                        software-properties-common
 
-  
+    apt-get clean
+
+
+    python3 -m pip install --upgrade pip
+    python3 -m pip install  multiprocess \
+                            joblib \
+                            scipy \
+                            numpy \
+                            transforms3d \
+                            matplotlib
+
+
     git clone https://github.com/belledon/blender_fix.git
     cd blender_fix
     chmod +x install.sh
