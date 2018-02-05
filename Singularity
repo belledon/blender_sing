@@ -14,7 +14,8 @@ from: ubuntu:16.04
     locale-gen en_US.UTF-8
     # export LANG=C.UTF-8
     # export LC_ALL=C
-    apt-get install -y  wget \
+    apt-get install -y  vim \
+                        wget \
                         bzip2 \
                         ca-certificates \
                         libglib2.0-0 \
@@ -26,15 +27,27 @@ from: ubuntu:16.04
                         g++ \
                         xvfb \
                         libyaml-cpp-dev \
-                        python3-dev \
-                        python3-pip \
                         software-properties-common
+
+    add-apt-repository ppa:jonathonf/python-3.6 && apt-get update
+    apt-get install -y python3.6 \
+		       python3.6-dev \
+    
+    mkdir /pip3.6 && cd /pip3.6
+    wget https://bootstrap.pypa.io/get-pip.py
+    python3.6 get-pip.py
+
+    rm /usr/local/bin/python3
+    rm /usr/local/bin/pip3
+    ln -s /usr/bin/python3.6 /usr/local/bin/python3
+    ln -s /usr/local/bin/pip /usr/local/bin/pip3
+ 
 
     apt-get clean
 
 
-    python3 -m pip install --upgrade pip
-    python3 -m pip install  multiprocess \
+    pip3 install --upgrade pip
+    pip3 install  multiprocess \
                             joblib \
                             scipy \
                             numpy \
@@ -42,7 +55,8 @@ from: ubuntu:16.04
                             matplotlib
 
 
-    git clone https://github.com/belledon/blender_fix.git
+    rm -rf blender_fix
+    git clone -b pypath https://github.com/belledon/blender_fix.git
     cd blender_fix
     chmod +x install.sh
-    ./install.sh
+    #./install.sh
