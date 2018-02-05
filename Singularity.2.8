@@ -59,4 +59,4 @@ from: ubuntu:16.04
     git clone -b pypath https://github.com/belledon/blender_fix.git
     cd blender_fix
     chmod +x install.sh
-    #./install.sh
+    ./install.sh
