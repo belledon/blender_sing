@@ -36,8 +36,7 @@ from: ubuntu:16.04
     mkdir /pip3.6 && cd /pip3.6
     wget https://bootstrap.pypa.io/get-pip.py
     python3.6 get-pip.py
-
-    rm /usr/local/bin/python3
+    
     rm /usr/local/bin/pip3
     ln -s /usr/bin/python3.6 /usr/local/bin/python3
     ln -s /usr/local/bin/pip /usr/local/bin/pip3
